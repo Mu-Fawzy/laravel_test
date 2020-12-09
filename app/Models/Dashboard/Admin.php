@@ -21,6 +21,7 @@ class Admin extends Authenticatable
         'name',
         'email',
         'password',
+        'active',
     ];
 
     /**
@@ -32,4 +33,11 @@ class Admin extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    
+    public function profile()
+    {
+        return $this->hasOne(Profile::class, 'admin_id', 'id');
+    }
+
 }

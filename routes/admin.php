@@ -30,6 +30,8 @@ Route::group(['prefix' => 'admin'], function () {
                 Route::post('/posts/forcedelete/{id}', 'PostController@forceDestroy')->name('posts.forcedelete');
                 Route::resource('/posts', 'PostController');
             });
+            Route::get('profile/{profile_id}', 'ProfileController@profile')->name('user.profile');
+            Route::post('profile/update/{profile_id}', 'ProfileController@profileUpdate')->name('user.profile.update');
         });
         Route::get('/{page}', 'AdminController@goToPage');
     });

@@ -258,7 +258,7 @@
 											</div>
 										</div>
 									</div>
-									<a class="dropdown-item" href=""><i class="bx bx-user-circle"></i>Profile</a>
+									<a class="dropdown-item" href="{{ route('user.profile', auth()->guard('admin')->id() ) }}"><i class="bx bx-user-circle"></i>Profile</a>
 									<a class="dropdown-item" href=""><i class="bx bx-cog"></i> Edit Profile</a>
 									<a class="dropdown-item" href=""><i class="bx bxs-inbox"></i>Inbox</a>
 									<a class="dropdown-item" href=""><i class="bx bx-envelope"></i>Messages</a>
