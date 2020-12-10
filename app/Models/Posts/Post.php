@@ -39,4 +39,9 @@ class Post extends Model
     {
         return $this->belongsTo('App\Models\Dashboard\Admin','admin_id', 'id');
     }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Models\Posts\Comment', 'post_id', 'id');
+    }
 }
