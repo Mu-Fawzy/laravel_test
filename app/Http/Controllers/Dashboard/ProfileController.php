@@ -19,7 +19,7 @@ class ProfileController extends Controller
         return view('admin.users.profile', compact('profile'));
     }
 
-    public function profileUpdate(Request $request,Profile $profile)
+    public function profileUpdate(Request $request, $profile)
     {
         $this->validate($request,[
             'gender'=> 'required',
@@ -27,7 +27,8 @@ class ProfileController extends Controller
             'email'=> 'required',
             'phone'=> 'required',
         ]);
-        return $request;
+        $profile = Profile::find($profile);
+
         $profile->update([
             'phone' => $request->phone,
             'twitter' => $request->twitter,
@@ -41,8 +42,11 @@ class ProfileController extends Controller
             'email' => $request->email,
         ]);
 
-        //if($profile && $profile->admin)
-            
-
+        
+        if($profile && $profile->admin)
+            $request->session()->flash('success', 'Your Profile Updated Succesfully!'); 
+    
+        return redirect()->back();    
+        
     }
 }

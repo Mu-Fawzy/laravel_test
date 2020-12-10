@@ -95,6 +95,7 @@
 						</div>
 						<div class="card">
 							<div class="card-body">
+								@include('alerts.admin')
 								<div class="tabs-menu ">
 									<!-- Tabs -->
 									<ul class="nav nav-tabs profile navtab-custom panel-tabs">
@@ -114,6 +115,7 @@
 									</div>
 								
 									<div class="tab-pane" id="settings">
+										
 										<div class="mb-4 main-content-label">Personal Information</div>
 										<form class="form-horizontal" action="{{ route('user.profile.update',$profile->id) }}" method="POST">
 											@csrf
