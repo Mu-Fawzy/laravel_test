@@ -18,7 +18,13 @@ class Post extends Model
 
     protected $table = 'posts';
     
-    protected $fillable = ['title','slug','description','content','image','active','views'];
+    protected $fillable = ['title','slug','description','content','image', 'admin_id','active','views'];
+
+    protected $hidden = [
+        'admin_id',
+    ];
+
+    public $timestamps = false;
 
     public function getActiveAttribute($value)
     {
@@ -27,5 +33,10 @@ class Post extends Model
     public function getImageAttribute($value)
     {
         return $value = 'assets/admin/img/'.$value;
+    }
+
+    public function admin()
+    {
+        return $this->belongsTo('App\Models\Dashboard\Admin','admin_id', 'id');
     }
 }

@@ -40,4 +40,10 @@ class Admin extends Authenticatable
         return $this->hasOne(Profile::class, 'admin_id', 'id');
     }
 
+
+    public function posts()
+    {
+        return $this->hasMany('App\Models\Posts\Post', 'admin_id', 'id');
+    }
+
 }

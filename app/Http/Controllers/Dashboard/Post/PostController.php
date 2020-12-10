@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard\Post;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
+use App\Models\Dashboard\Admin;
 use App\Models\Posts\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -18,7 +19,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::select('id', 'slug', 'title', 'description', 'image','active','views')->get();
+        $posts = Post::select('id','admin_id', 'slug', 'title', 'description', 'image','active','views')->get();
         return view('admin.posts.all', compact('posts'));
     }
 
@@ -51,6 +52,7 @@ class PostController extends Controller
         $data = [
             'title' => $request->title,
             'slug' => Str::slug($request->title, '-'),
+            'admin_id' => auth()->guard('admin')->id(),
             'description' => $request->description,
             'content' => $request->content,
             'active' => $request->active,
@@ -97,6 +99,7 @@ class PostController extends Controller
     public function update(PostRequest $request, Post $post)
     {
         $data = $request->only('title', 'content', 'description', 'active');
+        $data['admin_id'] = auth()->guard('admin')->id();
         if ($request->hasFile('image')) {
             Storage::disk('posts')->delete('posts/'.basename($post->image));
             $data['image'] = $request->image->store('posts','posts');
@@ -137,5 +140,10 @@ class PostController extends Controller
         Session()->flash('success', 'Post Restored succesfully!');
         return redirect()->back();
 
+    }
+
+    public function author($auhtor_id)
+    {
+        return $author = Admin::with('posts')->find($auhtor_id);
     }
 }

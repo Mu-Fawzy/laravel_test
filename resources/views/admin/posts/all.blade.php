@@ -36,6 +36,7 @@
 											<th class="text-right">Title</th>
 											<th>Active</th>
 											<th>Views</th>
+											<th>Author</th>
 											<th><a class="btn btn-sm btn-outline-danger" href="#">Actions</a></th>
 										</tr>
 									</thead>
@@ -61,6 +62,7 @@
 												</td>
 												<td class="text-center text-lg text-medium">{{ $post->active }}</td>
 												<td class="text-center text-lg text-medium">{{ $post->views }}</td>
+												<td class="text-center text-lg text-medium"><a href="{{ route('author.posts', $post->admin->id) }}">{{ $post->admin->name }}</a></td>
 												<td class="text-center">
 													@if (isset($trash))
 														<form id="post-{{ $post->id }}" action="{{ route('posts.forcedelete', $post->id) }}" method="post">

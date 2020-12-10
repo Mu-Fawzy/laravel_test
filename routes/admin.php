@@ -26,6 +26,7 @@ Route::group(['prefix' => 'admin'], function () {
             // Posts
             Route::group(['namespace' => 'Post'], function () {
                 Route::get('/posts/trash', 'PostController@trash')->name('posts.trash');
+                Route::get('/author/{auhtor_id}', 'PostController@author')->name('author.posts');
                 Route::get('/posts/restore/{id}', 'PostController@restore')->name('posts.restore');
                 Route::post('/posts/forcedelete/{id}', 'PostController@forceDestroy')->name('posts.forcedelete');
                 Route::resource('/posts', 'PostController');

@@ -21,9 +21,14 @@ class CreatePostsTable extends Migration
             $table->longText('content')->nullable();
             $table->string('image')->nullable();
             $table->boolean('active')->default(true);
-            $table->integer('views')->unsigned()->default(0);          
+            $table->integer('views')->unsigned()->default(0);
+            $table->integer('admin_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
+
+            
+            $table->foreign('admin_id')->references('id')->on('admins')->onDelete('cascade');
+            
         });
     }
 
